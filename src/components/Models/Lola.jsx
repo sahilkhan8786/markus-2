@@ -1,29 +1,37 @@
 import React, { useRef, useEffect } from 'react';
 import { useGLTF, useAnimations } from '@react-three/drei';
-import { useFrame } from '@react-three/fiber';
+import { useFrame, useThree } from '@react-three/fiber';
 import { Vector3 } from 'three';
 
 export function Lola(props) {
     const group = useRef();
     const { nodes, materials, animations } = useGLTF('/lola.glb');
     const { actions } = useAnimations(animations, group);
+    const { camera } = useThree();  // Access camera directly from context
 
     useEffect(() => {
         actions['Idle'].play();
+
+        if (group.current) {
+            group.current.rotation.y = -Math.PI / 2; // Rotate 45 degrees to the left
+        }
+
     }, [actions]);
 
-    const target = new Vector3(-2, -0.8, 2);
-
     useFrame(() => {
-        if (group.current) {
-            group.current.lookAt(target);
+        if (group.current && camera) {
+            // Safely handle the camera position
+
+            const cameraPosition = new Vector3().copy(camera.position);
+
+            group.current.lookAt(cameraPosition);
         }
     });
 
     return (
         <group ref={group} {...props} dispose={null}>
             <group name="Scene">
-                <group name="Armature" rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
+                <group name="Armature" rotation={[Math.PI / 2, 0, Math.PI / 7]} scale={0.01}>
                     <group name="Lola_New_Body">
                         <skinnedMesh
                             name="Mesh"
