@@ -8,8 +8,8 @@ export default function App() {
     <div className="w-full h-screen">
       <Canvas className="w-full h-screen">
         <ambientLight intensity={1} />
-        <ParkScene scale={[30, 30, 30]} position={[2, 0, 1]} rotation={[0, -Math.PI / 4, 0]} />
-        <Lola position={[-2, -1, 4]} rotation={[0, 1.2, 0]} />
+        <ParkScene scale={[30, 30, 30]} position={[2, 0, 1]} rotation={[0, -Math.PI / 5, 0]} />
+        <Lola position={[-4, -1, 2]} rotation={[0, 0.5, 0]} />
         <Environment preset="forest" background />
         <OrbitControls maxPolarAngle={Math.PI / 2} minPolarAngle={Math.PI / 2} zoomSpeed={false} />
       </Canvas>
