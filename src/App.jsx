@@ -49,7 +49,7 @@ export default function App() {
         <ParkScene scale={[30, 30, 30]} position={[2, 0, 1]} rotation={[0, -Math.PI / 5, 0]} />
         <Lola position={[6, -1, -1]} rotation={[0, 0.5, 0]} scale={[1.5, 1.5, 1.5]} />
         <Environment preset="forest" background />
-        <OrbitControls maxPolarAngle={Math.PI / 2} minPolarAngle={Math.PI / 2} zoomSpeed={false} />
+        <OrbitControls maxPolarAngle={Math.PI / 2} minPolarAngle={-Math.PI} minZoom={500} />
       </Canvas>
     </div>
   );
